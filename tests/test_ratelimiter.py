@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 import pytest
 
-from ratelimiter import RateLimitExceeded, rate_limit
+from slideguard import RateLimitExceeded, rate_limit
 
 
 def test_calls_within_limit_pass() -> None:
@@ -11,8 +11,8 @@ def test_calls_within_limit_pass() -> None:
     def multiply_by_two(value: int) -> int:
         return value * 2
 
-    with patch("ratelimiter.core.time", return_value=1000.0), patch(
-        "ratelimiter.decorator.time", return_value=1000.0
+    with patch("slideguard.core.time", return_value=1000.0), patch(
+        "slideguard.decorator.time", return_value=1000.0
     ):
         assert multiply_by_two(1) == 2
         assert multiply_by_two(2) == 4
@@ -24,8 +24,8 @@ def test_call_exceeding_limit_raises() -> None:
     def ping() -> str:
         return "pong"
 
-    with patch("ratelimiter.core.time", return_value=1000.0), patch(
-        "ratelimiter.decorator.time", return_value=1000.0
+    with patch("slideguard.core.time", return_value=1000.0), patch(
+        "slideguard.decorator.time", return_value=1000.0
     ):
         assert ping() == "pong"
         assert ping() == "pong"
@@ -38,8 +38,8 @@ def test_calls_allowed_again_after_window_expires() -> None:
     def ping() -> str:
         return "pong"
 
-    with patch("ratelimiter.core.time", side_effect=[1000.0, 1001.0, 1002.0, 1012.0]), patch(
-        "ratelimiter.decorator.time", side_effect=[1000.0, 1001.0, 1012.0]
+    with patch("slideguard.core.time", side_effect=[1000.0, 1001.0, 1002.0, 1012.0]), patch(
+        "slideguard.decorator.time", side_effect=[1000.0, 1001.0, 1012.0]
     ):
         assert ping() == "pong"
         assert ping() == "pong"
@@ -71,8 +71,8 @@ def test_thread_safety_only_n_succeed() -> None:
 
     threads = [threading.Thread(target=worker) for _ in range(total_threads)]
 
-    with patch("ratelimiter.core.time", return_value=1000.0), patch(
-        "ratelimiter.decorator.time", return_value=1000.0
+    with patch("slideguard.core.time", return_value=1000.0), patch(
+        "slideguard.decorator.time", return_value=1000.0
     ):
         for thread in threads:
             thread.start()
