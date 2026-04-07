@@ -1,4 +1,4 @@
-[build-system]
+[build-system] 
 requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
@@ -6,6 +6,27 @@ build-backend = "setuptools.build_meta"
 name = "slideguard"
 version = "0.1.0"
 requires-python = ">=3.9"
+
+# 🔹 Short description (one line)
+description = "A simple and lightweight rate limiter decorator for Python"
+
+# 🔹 Long description (shown on PyPI page)
+readme = "README.md"
+
+# 🔹 Optional but important
+authors = [
+  { name="Mujtaba", email="contact@mujtabaalmas.me" }
+]
+
+license = { text = "MIT" }
+
+keywords = ["rate limiter", "python", "decorator", "api", "throttling"]
+
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent"
+]
 
 [tool.setuptools.packages.find]
 include = ["slideguard*"]
