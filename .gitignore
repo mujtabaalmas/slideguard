@@ -5,3 +5,4 @@ venv/
 .venv/
 slideguard.egg-info/
 dist/
+test_script.py

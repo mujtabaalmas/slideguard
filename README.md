@@ -24,6 +24,12 @@ Install from PyPI:
 pip install slideguard
 ```
 
+Always upgrade to the latest PyPI release:
+
+```bash
+pip install --upgrade slideguard
+```
+
 Install locally from source:
 
 ```bash
